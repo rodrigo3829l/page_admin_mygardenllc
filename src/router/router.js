@@ -37,6 +37,11 @@ const routes = [
                 component : () => import('../components/admin/cotize/pages/CotizeWindow.vue')
             },
             {
+                path : 'quoteservice/:id',
+                name : 'quoteservice',
+                component : () => import('../components/admin/cotize/pages/QuoteService.vue')
+            },
+            {
                 path: '',
                 name: 'default-quote',
                 redirect: {name: 'quote'},
