@@ -14,9 +14,32 @@
 
       <v-data-table :headers="headers" :items="services" :search="search">
         <template v-slot:item.actions="{ item }">
-          <v-icon size="small" @click="quoteItem(item)">
-            mdi-currency-usd
-          </v-icon>
+          <template v-if="item.status === 'quoting'">
+            <!-- <v-icon size="small" @click="quoteItem(item)">
+              mdi-currency-usd
+            </v-icon> -->
+            <v-btn
+              variant="text"
+              @click="quoteItem(item)"
+              color="green-darken-3"
+              prepend-icon="mdi-currency-usd"
+            >
+              cotizar
+            </v-btn>
+          </template>
+          <template v-else>
+            <!-- <v-icon size="small" @click="editItem(item)">
+              mdi-pencil
+            </v-icon> -->
+            <v-btn
+              variant="text"
+              @click="editItem(item)"
+              color="yellow-darken-3"
+              prepend-icon="mdi-pencil"
+            >
+              Estatus
+            </v-btn>
+          </template>
         </template>
       </v-data-table>
     </v-card>
@@ -26,7 +49,6 @@
 
   <script>
 import { api } from "@/axios/axios.js";
-import { toast } from "vue3-toastify";
 export default {
   data() {
     return {
@@ -35,7 +57,7 @@ export default {
         {
           align: "start",
           key: "_id",
-          sortable: false,
+          
           title: "Id",
         },
         { key: "user", title: "Usuario" },
@@ -45,7 +67,7 @@ export default {
         { key: "quote", title: "Total" },
         { key: "pending", title: "Pendiente" },
         { key: "typeReserve", title: "Tipo de reserva" },
-        { title: "Cotizar", key: "actions", sortable: false },
+        { title: "Acciones", key: "actions", sortable: false, align : 'center' },
       ],
       services: [
         {
