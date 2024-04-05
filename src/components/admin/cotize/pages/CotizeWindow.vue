@@ -27,7 +27,7 @@
               cotizar
             </v-btn>
           </template>
-          <template v-else>
+          <template v-else-if="item.status === 'pay' || item.status === 'development'">
             <!-- <v-icon size="small" @click="editItem(item)">
               mdi-pencil
             </v-icon> -->
@@ -40,18 +40,56 @@
               Estatus
             </v-btn>
           </template>
+
+          <template v-else>
+            <!-- <v-icon size="small" @click="editItem(item)">
+              mdi-pencil
+            </v-icon> -->
+            <v-btn
+              variant="text"
+              @click="infoService(item)"
+              color="green-darken-3"
+              prepend-icon="mdi-pencil"
+            >
+              Informacion
+            </v-btn>
+          </template>
+
         </template>
       </v-data-table>
     </v-card>
   </v-container>
+
+  <v-dialog 
+    v-model="statusDialog" 
+    width="auto"
+    persistent
+  >
+    <v-card>
+      <v-card-title>
+        Confirmar cambio
+      </v-card-title>
+      <v-card-text>
+        ¿Está seguro de que desea cambiar el status del servicio?<br>
+        Tenga en cuenta que esta accion es irreversible
+      </v-card-text>
+      <v-card-actions class="justify-end">
+        <v-btn color="primary" @click="statusDialog = false">No</v-btn>
+        <v-btn color="error" @click="changeStatus">Sí, estoy seguro</v-btn>
+      </v-card-actions>
+    </v-card>
+  </v-dialog>
+
 </template>
 
 
   <script>
 import { api } from "@/axios/axios.js";
+import { toast } from 'vue3-toastify';
 export default {
   data() {
     return {
+      statusDialog : false,
       search: "",
       headers: [
         {
@@ -69,32 +107,59 @@ export default {
         { key: "typeReserve", title: "Tipo de reserva" },
         { title: "Acciones", key: "actions", sortable: false, align : 'center' },
       ],
-      services: [
-        {
-          _id: "65df25a9a08828c91d39f160",
-          user: "Rodrigo Del Angel Gerardo",
-          service: "Garden Design",
-          description: "Algo necesito",
-          status: "finish",
-          quote: 1218.93,
-          pending: 0,
-          typeReserve: "online",
-          pay: {
-            porcentage: 100,
-            totalPay: true,
-          },
-        },
-      ],
+      services: [],
+      item : {}
     };
   },
   methods: {
     quoteItem(item) {
         this.$router.push({name : 'quoteservice', params : { id: item._id }})
     },
+    infoService(item) {
+      console.log(item._id)
+        this.$router.push({name : 'infoservice', params : { id: item._id }})
+    },
+    editItem (item){
+      this.item = item
+      this.statusDialog = true
+    },
+    async changeStatus(){
+      console.log(this.item.status)
+      try {
+        let status = ''
+        if(this.item.status === 'pay'){
+          status = 'development'
+        }else{
+          status = 'finish'
+        }
+        console.log(status)
+        const token = localStorage.getItem('token')
+        const { data } = await api({
+            method: 'PUT',
+            url: `/schedule/change/${this.item._id}`,
+            headers: {
+                'Authorization': 'Bearer ' + token,
+                'rol': 'admin'
+            },
+            data : {status}
+        })
+        console.log(data)
+        if(data.success){
+          toast.success('Se cambio el status con exito')
+        }else{
+          toast.warning('No se pudo actualizar el status')
+        }
+      } catch (error) {
+        toast.error('Ocurrio un error al cambiar el status del servicio')
+        console.log(error)
+      } finally {
+        this.statusDialog = false
+        this.getServices()
+      }
+    },
     async getServices() {
       try {
         const {data} =  await api.get('/schedule/getServices')
-        console.log(data.services);
         this.services = data.services
 
       }catch (error) {

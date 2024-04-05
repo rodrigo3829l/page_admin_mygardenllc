@@ -42,10 +42,21 @@ const routes = [
                 component : () => import('../components/admin/cotize/pages/QuoteService.vue')
             },
             {
+                path : 'info/:id',
+                name : 'infoservice',
+                component : () => import('../components/admin/cotize/pages/InfoService.vue')
+            },
+            {
+                path : 'predictions',
+                name : 'predictions',
+                component : () => import('../components/admin/predictions/pages/PredictionsView.vue')
+            },
+            {
                 path: '',
                 name: 'default-quote',
                 redirect: {name: 'quote'},
             },
+            
         ]
     },
     {

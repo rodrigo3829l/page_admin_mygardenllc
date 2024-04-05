@@ -66,12 +66,12 @@
         </v-row>
         <v-row>
             <v-col cols="6">
-                <v-text-field v-model="laborCost" label="Costo de la mano de obra" variant="outlined"
+                <v-text-field v-model="laborCost" type="number" label="Costo de la mano de obra" variant="outlined"
                     color="green-darken-3">
                 </v-text-field>
             </v-col>
             <v-col cols="6">
-                <v-text-field v-model="machineryCost" label="Costo adicional de maquinaria" variant="outlined"
+                <v-text-field v-model="machineryCost" type="number" label="Costo adicional de maquinaria" variant="outlined"
                     color="green-darken-3">
                 </v-text-field>
             </v-col>
@@ -85,6 +85,9 @@
     <v-overlay :model-value="overlay" class="align-center justify-center">
         <v-progress-circular color="primary" indeterminate size="64"></v-progress-circular>
     </v-overlay>
+
+    
+
 </template>
 
 
@@ -106,7 +109,8 @@ export default {
             errors: {
                 product: '',
                 employed: ''
-            }
+            },
+            
         }
     },
     methods: {
@@ -198,6 +202,10 @@ export default {
                     toast.error('No se pudo cotizar el servicio')
                 } else {
                     toast.success('Servicio cotizado con exito')
+                    setTimeout(() => {
+                        this.$router.push({name: 'quote'});
+                    }, 1500);
+
                 }
                 console.log(datos)
             } catch (error) {

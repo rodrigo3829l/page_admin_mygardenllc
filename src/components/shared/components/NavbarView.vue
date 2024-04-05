@@ -1,4 +1,40 @@
 <template>
+  <v-navigation-drawer
+      v-model="drawer"
+      temporary
+    >
+    <v-list-item
+        prepend-avatar="https://randomuser.me/api/portraits/men/78.jpg"
+        :title="userStore.name"
+        :subtitle="userStore.email"
+      ></v-list-item>
+
+      <v-divider></v-divider>
+      <v-list-item
+        v-for="(link, index) in links"
+        :key="index"
+        :prepend-icon="link.icon"
+        :title="link.name"
+        @click="$router.push({ name: link.to })"
+        :value="link.to"
+      ></v-list-item>
+
+      <v-list-item v-if="theme.global.name.value === 'dark'" prepend-icon="mdi-white-balance-sunny" title="Light" @click="toggleTheme"></v-list-item>
+      <v-list-item v-if="theme.global.name.value === 'light'" prepend-icon="mdi-weather-night" title="Dark" @click="toggleTheme"></v-list-item>
+
+      <div v-if="userStore.rol === 'admin'">
+        <v-list-item prepend-icon="mdi-lightbulb-outline" @click="$router.push({ name: 'predictions' })" title="Predicciones"></v-list-item>
+        <v-list-item prepend-icon="mdi-currency-usd" @click="$router.push({ name: 'quote' })" title="Cotizar"></v-list-item>
+      </div>
+
+      <template v-slot:append v-if="userStore.token"> 
+        <div class="pa-2">
+          <v-btn block @click="logout">
+            Loguot
+          </v-btn>
+        </div>
+      </template>
+    </v-navigation-drawer>
     <nav class="navbar navbar-expand-lg navbar-light bg-green-darken-3 navbar-transition" clipped-left>
       <v-container>
         <div class="container">
@@ -18,7 +54,6 @@
                 Servicios de jardineria y mas
               </p>
             </v-col>
-            <!-- a este -->
             <v-col v-if="width > pixels" cols="auto">
               <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ml-auto">
@@ -28,49 +63,13 @@
                   @click="logout">
                     Logout
                   </v-btn>
-                  <!-- <router-link
-                    v-for="link in links"
-                    :key="link.to"
-                    :to="{ name: link.to }"
-                    class="nav-link"
-                    :class="{ 'is-active': $route.name === link.to }"
-                  >
-                    <v-icon size="15" color="white">{{ link.icon }}</v-icon>{{ link.name }}
-                  </router-link> -->
-                  <!-- <router-link
-                    :to="{ name: 'login-login' }"
-                    class="nav-link is-active"
-                  >
-                    <v-icon size="15" color="white">mdi-login</v-icon>login
-                  </router-link> -->
                 </ul>
               </div>
             </v-col>
-            <!-- a este -->
+
             <v-col cols="auto" class="d-flex align-items-center">
-              <!-- <v-btn icon variant="text" @click="changeLanguage('en')" class="mx-1" v-if="this.$i18n.locale === 'es' && width > pixels ">
-                <v-img
-                  src="https://flagcdn.com/16x12/us.webp"
-                  alt="USA"
-                  width="16"
-                  height="12"
-                ></v-img>
-              </v-btn>
-              <v-btn icon variant="text" @click="changeLanguage('es')" class="mx-1" v-if="this.$i18n.locale === 'en' && width > pixels " >
-                <v-img
-                  src="https://flagcdn.com/16x12/mx.webp"
-                  alt="Mexico"
-                  width="16"
-                  height="12"
-                ></v-img>
-              </v-btn> -->
-              <v-app-bar-nav-icon variant="text" @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-  
-              <!-- <v-btn v-if="width > pixels"  icon variant="text" @click="toggleTheme" >
-                <v-icon v-if="theme.global.name.value === 'light'">mdi-moon-waning-crescent</v-icon>
-                <v-icon v-if="theme.global.name.value === 'dark'">mdi-white-balance-sunny</v-icon>
-  
-              </v-btn>  -->
+
+              <v-app-bar-nav-icon v-if="userStore.token" variant="text" @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
             </v-col>
   
           </v-row>
