@@ -52,6 +52,11 @@ const routes = [
                 component : () => import('../components/admin/predictions/pages/PredictionsView.vue')
             },
             {
+                path : 'questions',
+                name : 'questions',
+                component : () => import('../components/admin/questions/pages/QuestionsView.vue')
+            },
+            {
                 path: '',
                 name: 'default-quote',
                 redirect: {name: 'quote'},
@@ -94,15 +99,5 @@ router.beforeEach( async (to, from, next) =>{
         next()
     }
 
-    
-
-    // const auth = userStore.token !== null;
-    // const needAuth = to.meta.requireAuth;
-
-    // if(needAuth && !auth){
-    //     next('forbidden')
-    // } else{
-    //     next()
-    // }
 })
 export default router

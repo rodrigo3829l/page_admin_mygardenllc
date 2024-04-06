@@ -25,6 +25,7 @@
       <div v-if="userStore.rol === 'admin'">
         <v-list-item prepend-icon="mdi-lightbulb-outline" @click="$router.push({ name: 'predictions' })" title="Predicciones"></v-list-item>
         <v-list-item prepend-icon="mdi-currency-usd" @click="$router.push({ name: 'quote' })" title="Cotizar"></v-list-item>
+        <v-list-item prepend-icon="mdi-help-circle-outline" @click="$router.push({ name: 'questions' })" title="Preguntas frecuentes"></v-list-item>
       </div>
 
       <template v-slot:append v-if="userStore.token"> 

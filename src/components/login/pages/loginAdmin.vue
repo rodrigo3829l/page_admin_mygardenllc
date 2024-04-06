@@ -5,10 +5,10 @@
         <v-card class="elevation-12">
           <v-toolbar color="green-darken-3" dark>
             <v-toolbar-title class="white--text text-center">
-              {{ ($t('login.pages.loginAdmin.login')) }}
+              {{ $t('login.pages.loginAdmin.login') }}
             </v-toolbar-title>
           </v-toolbar>
-          <v-card-text>
+          <v-card-text> 
             <v-divider></v-divider>
             <!-- <v-form> -->
               <label for=""> {{ ($t('login.pages.loginAdmin.emailString')) }}</label>

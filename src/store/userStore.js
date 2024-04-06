@@ -23,6 +23,7 @@ export const useUserStore = defineStore('user', () => {
             expireIn.value = data.expiresIn
             rol.value = data.rol
             localStorage.setItem('token', token.value)
+            localStorage.setItem('rol', rol.value)
 
             setTime();
             // const resp = await api({
@@ -50,8 +51,6 @@ export const useUserStore = defineStore('user', () => {
             console.log(error)
         } finally{
             localStorage.clear();
-            // localStorage.removeItem('rol');
-            // localStorage.removeItem('token');
             resetStore();
         }
     }
@@ -62,8 +61,6 @@ export const useUserStore = defineStore('user', () => {
         email.value = null
         rol.value = null
         localStorage.clear();
-        // localStorage.removeItem('rol');
-        // localStorage.removeItem('token');
     }
     const setTime = () =>{
         setTimeout(() => {
@@ -88,6 +85,7 @@ export const useUserStore = defineStore('user', () => {
             email.value = data.email
             rol.value = data.rol
             localStorage.setItem('token', token.value,);
+            localStorage.setItem('rol', rol.value)
             setTime();
         } catch (error) {
             console.log(error)
@@ -95,8 +93,10 @@ export const useUserStore = defineStore('user', () => {
     }
     const initializeStore = () => {
         const storedToken = localStorage.getItem('token');
+        const storedRol = localStorage.getItem('rol');
         if (storedToken ) {
             token.value = storedToken;
+            rol.value = storedRol;
             setTime();
         }
     };

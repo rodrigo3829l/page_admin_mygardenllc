@@ -29,10 +29,11 @@ createApp(App)
   .use(vuetify)
   .use(pinia)
   .use(router)
+  .use(i18n)
   .use(Vue3Toastify, {
     autoClose: 3000, // Configuraciones globales (opcional)
   })
   .mount('#app')
 
   const userStore = useUserStore()
-userStore.initializeStore()
+  userStore.initializeStore()
