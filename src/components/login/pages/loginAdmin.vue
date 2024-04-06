@@ -77,11 +77,11 @@ const userStore = useUserStore()
 export default {
   data() {
     return {
-      email : '',
-      password : '',
+      email : 'finprueba@gmail.com',
+      password : 'Hola123#',
       rol : '',
       passwordVisible : false,
-      department : '',
+      department : 'finance',
       dialog : false
     }
     
