@@ -1,10 +1,10 @@
 <template>
   <v-container>
-    <v-card title="Servicios" flat>
+    <v-card :title="$t('admin.cotize.cotizeWindow.serviceString')" flat>
       <template v-slot:text>
         <v-text-field
           v-model="search"
-          label="Search"
+          :label="$t('admin.cotize.cotizeWindow.searchString')"
           prepend-inner-icon="mdi-magnify"
           variant="outlined"
           hide-details
@@ -24,7 +24,7 @@
               color="green-darken-3"
               prepend-icon="mdi-currency-usd"
             >
-              cotizar
+              {{ ($t('admin.cotize.cotizeWindow.quoteString')) }}
             </v-btn>
           </template>
           <template v-else-if="item.status === 'pay' || item.status === 'development'">
@@ -37,7 +37,7 @@
               color="yellow-darken-3"
               prepend-icon="mdi-pencil"
             >
-              Estatus
+            {{ ($t('admin.cotize.cotizeWindow.statusString')) }}
             </v-btn>
           </template>
 
@@ -51,7 +51,7 @@
               color="green-darken-3"
               prepend-icon="mdi-pencil"
             >
-              Informacion
+            {{ ($t('admin.cotize.cotizeWindow.informationString')) }}
             </v-btn>
           </template>
 
@@ -67,15 +67,15 @@
   >
     <v-card>
       <v-card-title>
-        Confirmar cambio
+        {{ ($t('admin.cotize.cotizeWindow.confirmString')) }}
       </v-card-title>
       <v-card-text>
-        ¿Está seguro de que desea cambiar el status del servicio?<br>
-        Tenga en cuenta que esta accion es irreversible
+        {{ ($t('admin.cotize.cotizeWindow.descriptionString')) }}<br>
+        {{ ($t('admin.cotize.cotizeWindow.description1String')) }}
       </v-card-text>
       <v-card-actions class="justify-end">
         <v-btn color="primary" @click="statusDialog = false">No</v-btn>
-        <v-btn color="error" @click="changeStatus">Sí, estoy seguro</v-btn>
+        <v-btn color="error" @click="changeStatus"> {{ ($t('admin.cotize.cotizeWindow.yesString')) }}</v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>
@@ -86,6 +86,7 @@
   <script>
 import { api } from "@/axios/axios.js";
 import { toast } from 'vue3-toastify';
+import { i18n } from '@/main.js'
 export default {
   data() {
     return {
@@ -98,14 +99,14 @@ export default {
           
           title: "Id",
         },
-        { key: "user", title: "Usuario" },
-        { key: "service", title: "Servicio" },
-        { key: "description", title: "Descripcion" },
-        { key: "status", title: "Estatus" },
-        { key: "quote", title: "Total" },
-        { key: "pending", title: "Pendiente" },
-        { key: "typeReserve", title: "Tipo de reserva" },
-        { title: "Acciones", key: "actions", sortable: false, align : 'center' },
+        { key: "user", title: i18n.global.t('admin.cotize.cotizeWindow.userString') },
+        { key: "service", title: i18n.global.t('admin.cotize.cotizeWindow.serviceString') },
+        { key: "description", title: i18n.global.t('admin.cotize.cotizeWindow.desString') },
+        { key: "status", title: i18n.global.t('admin.cotize.cotizeWindow.statusString') },
+        { key: "quote", title: i18n.global.t('admin.cotize.cotizeWindow.quote') },
+        { key: "pending", title: i18n.global.t('admin.cotize.cotizeWindow.pendingString') },
+        { key: "typeReserve", title: i18n.global.t('admin.cotize.cotizeWindow.typeReserveString') },
+        { title: i18n.global.t('admin.cotize.cotizeWindow.actionsString'), key: "actions", sortable: false, align : 'center' },
       ],
       services: [],
       item : {}
@@ -145,12 +146,12 @@ export default {
         })
         console.log(data)
         if(data.success){
-          toast.success('Se cambio el status con exito')
+          toast.success(this.$t('admin.cotize.cotizeWindow.changeString'))
         }else{
-          toast.warning('No se pudo actualizar el status')
+          toast.warning(this.$t('admin.cotize.cotizeWindow.updateString'))
         }
       } catch (error) {
-        toast.error('Ocurrio un error al cambiar el status del servicio')
+        toast.error(this.$t('admin.cotize.cotizeWindow.mistakeString'))
         console.log(error)
       } finally {
         this.statusDialog = false

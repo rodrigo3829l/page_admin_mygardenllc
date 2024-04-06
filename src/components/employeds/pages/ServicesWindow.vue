@@ -1,10 +1,10 @@
 <template>
   <v-container>
-    <v-card :title="`Bienvenido, estos son los servicvios en los que has trabajado: ${userStore.name}`" flat>
+    <v-card :title="$t('employedsPages.servicesWindow.welcomeString')" ${userStore.name} flat>
       <template v-slot:text>
         <v-text-field
           v-model="search"
-          label="Search"
+          :label="$t('employedsPages.servicesWindow.welcomeString')"
           prepend-inner-icon="mdi-magnify"
           variant="outlined"
           hide-details
@@ -24,7 +24,7 @@
             color="green-darken-3"
             prepend-icon="mdi-pencil"
           >
-            Informacion
+            {{ ($t('employedsPages.servicesWindow.information')) }}
           </v-btn>
 
       </template>
@@ -36,7 +36,7 @@
 <script>
 import { api } from '@/axios/axios.js'
 import { useUserStore } from '@/store/userStore.js'
-
+import { i18n } from '@/main.js'
 const userStore = useUserStore()
 export default {
   data () {
@@ -47,11 +47,11 @@ export default {
         {
           align: "start",
           key: "service.name",
-          title: "Servicio",
+          title: i18n.global.t('employedsPages.servicesWindow.service'),
         },
-        { key: "description", title: "Descripcion" },
-        { key: "status", title: "Estatus" },
-        { title: "Acciones", key: "actions", sortable: false, align : 'center' },
+        { key: "description", title: i18n.global.t('employedsPages.servicesWindow.description') },
+        { key: "status", title: i18n.global.t('employedsPages.servicesWindow.status') },
+        { title: i18n.global.t('employedsPages.servicesWindow.actions'), key: "actions", sortable: false, align : 'center' },
         // { key: "description", title: "Descripcion" },
         // { key: "status", title: "Estatus" },
         // { key: "quote", title: "Total" },

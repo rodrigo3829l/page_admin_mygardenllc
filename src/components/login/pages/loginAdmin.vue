@@ -5,33 +5,33 @@
         <v-card class="elevation-12">
           <v-toolbar color="green-darken-3" dark>
             <v-toolbar-title class="white--text text-center">
-              Login
+              {{ ($t('login.pages.loginAdmin.login')) }}
             </v-toolbar-title>
           </v-toolbar>
           <v-card-text>
             <v-divider></v-divider>
             <!-- <v-form> -->
-              <label for="">Email</label>
+              <label for=""> {{ ($t('login.pages.loginAdmin.emailString')) }}</label>
               <v-select
               color="green-darken-3"
                 v-model="department"
                 variant="underlined"
-                placeholder="Selecciona el departamento al que perteneces"
-                label="Selecciona tu departamento"
+                :placeholder="$t('login.pages.loginAdmin.description')"
+                :label="$t('login.pages.loginAdmin.department')"
                 :items="['admin', 'employed', 'finance']"
               ></v-select>
               <v-text-field
                 v-model="email"
-                label="Insertar Email"
+                :label="$t('login.pages.loginAdmin.insertEmail')"
                 variant="underlined"
                 prepend-inner-icon="mdi-account"
                 color="green-darken-3"
                 outlined
                 required
               ></v-text-field>
-              <label for="">Password</label>
+              <label for=""> {{ ($t('login.pages.loginAdmin.password')) }}</label>
               <v-text-field
-                label="Insertar una contraseña valida"
+                :label="$t('login.pages.loginAdmin.insert')"
                 v-model="password"
                 variant="underlined"
                 prepend-inner-icon="mdi-lock"
@@ -58,7 +58,7 @@
                 @click="login"
               >
                 <v-icon left>mdi-login</v-icon>
-                Login
+                {{ ($t('login.pages.loginAdmin.login')) }}
               </v-btn>
             <v-divider></v-divider>
             <div class="text-center mt-5">

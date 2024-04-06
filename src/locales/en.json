@@ -1,0 +1,129 @@
+{
+    "admin": {
+        "cotize": {
+            "cotizeWindow": {
+                "serviceString": "Services",
+                "searchString": "Search",
+                "quoteString": "Quote",
+                "statusString": "Status",
+                "informationString": "Information",
+                "confirmString": "Confirm change",
+                "descriptionString": "Are you sure you want to change the service status?",
+                "description1String": "Please note that this action is irreversible",
+                "yesString": "Yes, I'm sure",
+                "userString": "User",
+                "desString": "Description",
+                "quote": "Total",
+                "pendingString": "Pending",
+                "typeReserveString": "Reservation Type",
+                "actionsString": "Actions",
+                "changeString": "Status changed successfully",
+                "updateString": "Status update failed",
+                "mistakeString": "An error occurred while changing the service status"
+            },
+            "infoService": {
+                "infoServiceString": "Service Information",
+                "detailsString": "Service Details",
+                "descriptionString": "Description",
+                "totalString": "Total Service Price",
+                "earringString": "Pending",
+                "statusString": "Status",
+                "productsString": "Used Products",
+                "products": "Products",
+                "amount": "Amount",
+                "total": "Total",
+                "costsString": "Breakdown of Costs",
+                "handWork": "Labor Costs",
+                "machinery": "Machinery Costs",
+                "employee": "Employee"
+            },
+            "quoteService": {
+                "serviceString": "Service Quotation",
+                "desString": "Select employees and products for the service",
+                "employeeString": "Select employees",
+                "productsString": "Select products",
+                "amountString": "Quantity",
+                "costString": "Labor Cost",
+                "costMachinery": "Additional Machinery Cost",
+                "quoteString": "Quote",
+                "quoteServiceString": "Service could not be quoted",
+                "quotedSuccess": "Service quoted successfully",
+                "existsString": "You have already selected this employee",
+                "selectProduct": "You have already selected this product"
+            }
+        },
+        "predictions": {
+            "predictionsView": {
+                "ChooseString": "Select reference date",
+                "yearString": "Year",
+                "month": "Month",
+                "servicesString": "Number of Services",
+                "dateString": "Select current date",
+                "prediction": "Years of Prediction",
+                "dataString": "Data",
+                "serviceString": "Services",
+                "timeString": "Time",
+                "reference": "Reference Date",
+                "monthString": "Months",
+                "currentDate": "Current Date",
+                "predictionString": "Prediction",
+                "calculateString": "Calculate"
+            }
+        }
+    },
+    "employedsPages": {
+        "servicesWindow": {
+            "welcomeString": "Welcome, here are the services you have worked on:",
+            "SearchString": "Search",
+            "information": "Information",
+            "service": "Services",
+            "description": "Description",
+            "status": "Status",
+            "actions": "Actions"
+        }
+    },
+    "finance": {
+        "pages": {
+            "infoPays": {
+                "payments": "Payments",
+                "searchUser": "Search by user",
+                "searchPayment": "Search by payment type",
+                "paymentType": "Payment Type",
+                "lookFor": "Search by date",
+                "date": "Date",
+                "edit": "Edit Amount",
+                "amount": "Amount",
+                "cancel": "Cancel",
+                "editString": "Edit",
+                "confirm": "Confirm deletion",
+                "description": "Are you sure you want to delete the payment?",
+                "description1": "Please note that this action cannot be undone",
+                "yesString": "Yes, I'm sure",
+                "payString": "Payments Made",
+                "dateString": "Payment Date",
+                "user": "User",
+                "service": "Paid Service",
+                "descriptionString": "Description",
+                "guyPay": "Payment Type",
+                "actions": "Actions",
+                "noUpdatePay": "Payment update failed",
+                "payUpdate": "Payment updated successfully",
+                "eliminate": "Payment deletion failed",
+                "payEliminate": "Payment deleted successfully"
+            }
+        }
+    },
+    "login": {
+        "pages": {
+            "loginAdmin": {
+                "login": "Login",
+                "emailString": "Email",
+                "description": "Select the department you belong to",
+                "department": "Select your department",
+                "insertEmail": "Insert Email",
+                "password": "Password",
+                "insert": "Insert a valid password"
+            }
+        }
+    }
+}

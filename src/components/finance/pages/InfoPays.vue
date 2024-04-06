@@ -1,30 +1,30 @@
 <template>
   <v-container>
     <v-card
-    title="Pagos"
+    :title="$t('finance.pages.infoPays.payments')"
     flat
   >
     <template v-slot:text>        
       <v-text-field 
-        label="Buscar por usuario"
+        :label="$t('finance.pages.infoPays.searchUser')"
         v-model="name" 
         class="ma-2" 
         type="text"
         hide-details
       ></v-text-field>
       <v-select
-        label="Buscar por tipo de paago"
+        :label="$t('finance.pages.infoPays.searchPayment')"
         v-model="type"
         class="ma-2"
-        placeholder="Tipo de pago"
+        :placeholder="$t('finance.pages.infoPays.paymentType')"
         :items="['card', 'cash']"
         hide-details
       ></v-select>
       <v-text-field
         v-model="fecha"
         class="ma-2"
-        label="Buscar por fecha"
-        placeholder="Fecha"
+        :label="$t('finance.pages.infoPays.lookFor')"
+        :placeholder="$t('finance.pages.infoPays.date')"
         type="date"
         hide-details
       ></v-text-field>
@@ -62,18 +62,18 @@
   </v-container>
   <v-dialog v-model="showEditDialog" width="auto" persistent>
     <v-card>
-    <v-card-title>Editar Monto</v-card-title>
+    <v-card-title>{{ ($t('finance.pages.infoPays.edit')) }}</v-card-title>
     <v-card-text>
       <v-text-field
         v-model="monto"
-        label="Monto"
+        :label="$t('finance.pages.infoPays.amount')"
         type="number"
         outlined
       ></v-text-field>
     </v-card-text>
     <v-card-actions class="justify-end">
-      <v-btn color="success" @click="showEditDialog = false">Cancelar</v-btn>
-      <v-btn color="error" @click="editPay">Editar</v-btn>
+      <v-btn color="success" @click="showEditDialog = false">{{ ($t('finance.pages.infoPays.cancel')) }}</v-btn>
+      <v-btn color="error" @click="editPay">{{ ($t('finance.pages.infoPays.editString')) }}</v-btn>
     </v-card-actions>
   </v-card>
   </v-dialog>
@@ -85,15 +85,15 @@
   >
     <v-card>
       <v-card-title>
-        Confirmar eliminacion
+        {{ ($t('finance.pages.infoPays.confirm')) }}
       </v-card-title>
       <v-card-text>
-        ¿Está seguro de que desea eliminar el pago?<br>
-        Tenga en cuenta que esta accion no se puede revertir
+        {{ ($t('finance.pages.infoPays.description')) }}<br>
+        {{ ($t('finance.pages.infoPays.description1')) }}
       </v-card-text>
       <v-card-actions class="justify-end">
         <v-btn color="primary" @click="showDeleteDialog = false">No</v-btn>
-        <v-btn color="error" @click="deletePay">Sí, estoy seguro</v-btn>
+        <v-btn color="error" @click="deletePay">{{ ($t('finance.pages.infoPays.yesString')) }}</v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>
@@ -114,6 +114,7 @@
 <script>
 import { api } from '@/axios/axios.js';
 import { toast } from 'vue3-toastify';
+import { i18n } from '@/main.js'
 const FakeAPI = {
     async fetch ({ page, itemsPerPage, sortBy, search, pays }) {
       return new Promise(resolve => {
@@ -161,15 +162,15 @@ const FakeAPI = {
             align: 'start',
             key: '_id',
             sortable: false,
-            title: 'Pagos realizados',
+            title: i18n.global.t('finance.pages.infoPays.payString'),
           },
-          { key: 'date', title: 'Fecha de pago' },
-          { key: 'user', title: 'Usuario' },
-          { key: 'amount', title: 'Monto' },
-          { key: 'service', title: 'Servicio pagado' },
-          { key: 'description', title: 'descripcion' },
-          { key: 'type', title: 'Tipo de pago' },
-          { title: 'Actions', key: 'actions', sortable: false },
+          { key: 'date', title: i18n.global.t('finance.pages.infoPays.dateString') },
+          { key: 'user', title: i18n.global.t('finance.pages.infoPays.user') },
+          { key: 'amount', title: i18n.global.t('finance.pages.infoPays.amount') },
+          { key: 'service', title: i18n.global.t('finance.pages.infoPays.service') },
+          { key: 'description', title: i18n.global.t('finance.pages.infoPays.descriptionString') },
+          { key: 'type', title: i18n.global.t('finance.pages.infoPays.guyPay') },
+          { title: i18n.global.t('finance.pages.infoPays.actions'), key: 'actions', sortable: false },
         ],
         pays : [
           
@@ -231,9 +232,9 @@ const FakeAPI = {
               data : datos
             })
             if(!data.success){
-              toast.error('No se pudo actualizar el pago')
+              toast.error(this.$t('finance.pages.infoPays.noUpdatePay'))
             }else{
-              toast.success('Pago actualizado con exito')
+              toast.success(this.$t('finance.pages.infoPays.payUpdate'))
             }
         } catch (error) {
           console.log(error)
@@ -281,9 +282,9 @@ const FakeAPI = {
             })
             console.log(data)
             if(!data.success){
-              toast.error('No se pudo eliminar el pago')
+              toast.error(this.$t('finance.pages.infoPays.eliminate'))
             }else{
-              toast.success('Pago eliminado con exito')
+              toast.success(this.$t('finance.pages.infoPays.payEliminate'))
             }
         } catch (error) {
           console.log(error)

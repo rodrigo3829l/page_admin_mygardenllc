@@ -1,0 +1,139 @@
+{
+    "admin" : {
+        "cotize":{
+            "cotizeWindow":{
+                "serviceString":"Servicios",
+                "searchString":"Buscar",
+                "quoteString":"Cotizar",
+                "statusString":"Estatus",
+                "informationString":"Informacion",
+                "confirmString":"Confirmar cambio",
+                "descriptionString":" ¿Está seguro de que desea cambiar el status del servicio?",
+                "description1String":"Tenga en cuenta que esta accion es irreversible",
+                "yesString":"Sí, estoy seguro",
+                "userString":"Usuario",
+                "desString":"Descripcion",
+                "quote":"Total",
+                "pendingString":"Pendiente",
+                "typeReserveString":"Tipo de reserva",
+                "actionsString":"Acciones",
+
+                "changeString":"Se cambio el status con exito",
+                "updateString":"No se pudo actualizar el status",
+                "mistakeString":"Ocurrio un error al cambiar el status del servicio"
+            },
+
+            "infoService":{
+                "infoServiceString":"Informaion del servicio",
+                "detailsString":"Detalles del Servicio",
+                "descriptionString":"Descripcion",
+                "totalString":"Precio total del servicio",
+                "earringString":"Pendiente",
+                "statusString":"Estatus",
+                "productsString":"Productos usados",
+                "products":"Productos",
+                "amount":"Cantidad",
+                "total":"Total",
+
+                "costsString":"Costos desglosados",
+                "handWork":"Costos en mano de obra",
+                "machinery":"Costos de maquinaria",
+                "employee":"Empleado"
+            },
+            
+            "quoteService":{
+                "serviceString":"Cotizar Servicio",
+                "desString":"Selecciona empleados y productos para el servicio",
+                "employeeString":"Selecciona a los empleados",
+                "productsString":"Selecciona los productos",
+                "amountString":"Cantidad",
+                "costString":"Costo de la mano de obra",
+                "costMachinery":"Costo adicional de maquinaria",
+                "quoteString":"Cotizar",
+                "quoteServiceString":"No se pudo cotizar el servicio",
+                "quotedSuccess":"Servicio cotizado con exito",
+                "existsString":"Ya seleccionaste este empleado",
+                "selectProduct":"Ya seleccionaste este producto"
+             }
+        },
+
+        "predictions":{
+            "predictionsView":{
+                "ChooseString":"Seleccione fecha de referencia",
+                "yearString":"Año",
+                "month":"Mes",
+                "servicesString":"Cantidad de Servicios",
+                "dateString":"Selecciona la fecha actual",
+                "prediction":"Años de predicción",
+                "dataString":"Datos",
+                "serviceString":"Servicios",
+                "timeString":"Tiempo",
+                "reference":"Fecha de referencia",
+                "monthString":"Meses",
+                "currentDate":"Fecha actual",
+                "predictionString":"Prediccion",
+                "calculateString":"Calcular"
+            }
+        }
+    },
+
+    "employedsPages":{
+        "servicesWindow":{
+            "welcomeString":"Bienvenido, estos son los servicvios en los que has trabajado:",
+            "SearchString":"Buscar",
+            "information":"Informacion",
+            "service":"Servicios",
+            "description":"Descripcion",
+            "status":"Estatus",
+            "actions":"Acciones"
+        }
+    },
+    "finance":{
+        "pages":{
+            "infoPays":{
+                "payments":"Pagos",
+                "searchUser":"Buscar por usuario",
+                "searchPayment":"Buscar por tipo de pago",
+                "paymentType":"Tipo de pago",
+                "lookFor":"Buscar por fecha",
+                "date":"Fecha",
+                "edit":"Editar Monto",
+                "amount":"Monto",
+                "cancel":"Cancelar",
+                "editString":"Editar",
+                "confirm":"Confirmar eliminacion",
+                "description":"¿Está seguro de que desea eliminar el pago?",
+                "description1":" Tenga en cuenta que esta accion no se puede revertir",
+                "yesString":"Sí, estoy seguro",
+                "payString":"Pagos Realizados",
+                "dateString":"Fecha de pago",
+                "user":"usuario",
+                "service":"Servicio pagado",
+                "descriptionString":"Descripcion",
+                "guyPay":"Tipo de Pago",
+                "actions":"Acciones",
+                "noUpdatePay":"No se pudo actualizar el pago",
+                "payUpdate":"Pago actualizado con exito",
+                "eliminate":"No se pudo eliminar el pago",
+                "payEliminate":"Pago eliminado con exito"
+            }
+        }
+            
+    },
+    "login":{
+        "pages":{
+            "loginAdmin":{
+                "login":"Login",
+                "emailString":"Email",
+                "description":"Selecciona el departamento al que perteneces",
+                "department":"Selecciona tu departamento",
+                "insertEmail":"Insertar Email",
+                "password":"Contraseña",
+                "insert":"Insertar una contraseña valida"
+            }
+        }
+    }
+}
+
+
+

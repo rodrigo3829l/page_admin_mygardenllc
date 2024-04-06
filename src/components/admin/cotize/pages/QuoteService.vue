@@ -2,15 +2,15 @@
     <v-container>
         <v-row>
             <v-col cols="12">
-                <h1>Cotiza un servicio</h1>
-                <p>Selecciona empleados y productos para el servicio</p>
+                <h1>{{ ($t('admin.cotize.quoteService.serviceString')) }}</h1>
+                <p>{{ ($t('admin.cotize.quoteService.desString')) }}</p>
             </v-col>
         </v-row>
         <v-row>
             <v-col cols="6">
                 <v-autocomplete v-model="employed" :items="itemsEmployed" item-title="name" item-value="data"
                     :error-messages="errors.employed" @update:model-value="addEmployed" variant="outlined"
-                    label="Selecciona a los empleados" color="green-darken-3">
+                    :label="$t('admin.cotize.quoteService.employeeString')" color="green-darken-3">
                 </v-autocomplete>
                 <v-card>
                     <v-list v-if="selectedEmployeds.length > 0">
@@ -35,7 +35,7 @@
             <v-col cols="6">
                 <v-autocomplete v-model="product" :items="itemsProducts" item-title="name" item-value="data"
                     :error-messages="errors.product" @update:model-value="addProduct" variant="outlined"
-                    label="Selecciona los productos" color="green-darken-3">
+                    :label="$t('admin.cotize.quoteService.productsString')" color="green-darken-3">
                 </v-autocomplete>
                 <v-card>
                     <v-list v-if="selectedProducts.length > 0">
@@ -48,7 +48,7 @@
                                 </v-col>
                                 <v-col cols="4">
                                     <v-text-field v-model="selectedProduct.quantity" type="number" variant="outlined"
-                                        color="green-darken-3" label="Cantidad" density="compact" style="width: 100px;">
+                                        color="green-darken-3" :label="$t('admin.cotize.quoteService.amountString')" density="compact" style="width: 100px;">
                                     </v-text-field>
                                 </v-col>
                                 <v-col cols="2">
@@ -66,19 +66,19 @@
         </v-row>
         <v-row>
             <v-col cols="6">
-                <v-text-field v-model="laborCost" type="number" label="Costo de la mano de obra" variant="outlined"
+                <v-text-field v-model="laborCost" type="number" :label="$t('admin.cotize.quoteService.costString')" variant="outlined"
                     color="green-darken-3">
                 </v-text-field>
             </v-col>
             <v-col cols="6">
-                <v-text-field v-model="machineryCost" type="number" label="Costo adicional de maquinaria" variant="outlined"
+                <v-text-field v-model="machineryCost" type="number" :label="$t('admin.cotize.quoteService.costMachinery')" variant="outlined"
                     color="green-darken-3">
                 </v-text-field>
             </v-col>
         </v-row>
         <v-row>
             <v-col class="text-right">
-                <v-btn color="green-darken-3" @click="quote" :disabled="overlay">Cotizar</v-btn>
+                <v-btn color="green-darken-3" @click="quote" :disabled="overlay">{{ ($t('admin.cotize.quoteService.quoteString')) }}</v-btn>
             </v-col>
         </v-row>
     </v-container>
@@ -199,9 +199,9 @@ export default {
                 })
                 console.log(data)
                 if (!data.success) {
-                    toast.error('No se pudo cotizar el servicio')
+                    toast.error(this.$t('admin.cotize.quoteService.quoteServiceString'))
                 } else {
-                    toast.success('Servicio cotizado con exito')
+                    toast.success(this.$t('admin.cotize.quoteService.quotedSuccess'))
                     setTimeout(() => {
                         this.$router.push({name: 'quote'});
                     }, 1500);
@@ -217,7 +217,7 @@ export default {
         addEmployed() {
             if (this.employed) {
                 if (this.selectedEmployeds.some(employed => employed.id === this.employed.id)) {
-                    this.errors.employed = 'Ya seleccionaste este empleado'
+                    this.errors.employed = (this.$t('admin.cotize.quoteService.existsString'))
                 } else {
                     this.errors.employed = ''
                     this.selectedEmployeds.push(this.employed);
@@ -228,7 +228,7 @@ export default {
         addProduct() {
             if (this.product) {
                 if (this.selectedProducts.some(product => product.id === this.product.id)) {
-                    this.errors.product = 'Ya seleccionaste este producto'
+                    this.errors.product = (this.$t('admin.cotize.quoteService.selectProduct'))
                 } else {
                     this.errors.product = ''
                     this.selectedProducts.push(this.product);

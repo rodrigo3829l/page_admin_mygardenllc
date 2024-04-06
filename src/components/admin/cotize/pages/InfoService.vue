@@ -2,7 +2,7 @@
     <v-container style="height: 400px;" v-if="!loaded">
         <v-row class="fill-height" align-content="center" justify="center">
             <v-col class="text-subtitle-1 text-center" cols="12">
-                Informaion del servicio
+                {{ ($t('admin.cotize.infoService.infoServiceString')) }}
             </v-col>
             <v-col cols="6">
                 <v-progress-linear color="green-darken-3" indeterminate rounded height="6"></v-progress-linear>
@@ -20,21 +20,21 @@
             </v-col>
             <v-col cols="12" md="6">
                 <v-list lines="two">
-                    <h2>Detalles del servicio</h2>
+                    <h2>{{ ($t('admin.cotize.infoService.detailsString')) }}</h2>
                     <v-list-item>
-                        <v-list-item-title>Descripcion</v-list-item-title>
+                        <v-list-item-title>{{ ($t('admin.cotize.infoService.descriptionString')) }}</v-list-item-title>
                         <v-list-item-subtitle>{{ serviceDescription }}</v-list-item-subtitle>
                     </v-list-item>
                     <v-list-item>
-                        <v-list-item-title>Precio total del servicio</v-list-item-title>
+                        <v-list-item-title>{{ ($t('admin.cotize.infoService.totalString')) }}</v-list-item-title>
                         <v-list-item-subtitle>${{ servicePrice }}</v-list-item-subtitle>
                     </v-list-item>
                     <v-list-item>
-                        <v-list-item-title>Pendiente</v-list-item-title>
+                        <v-list-item-title>{{ ($t('admin.cotize.infoService.earringString')) }}</v-list-item-title>
                         <v-list-item-subtitle>${{ pending }}</v-list-item-subtitle>
                     </v-list-item>
                     <v-list-item>
-                        <v-list-item-title>Estatus</v-list-item-title>
+                        <v-list-item-title>{{ ($t('admin.cotize.infoService.statusString')) }}</v-list-item-title>
                         <v-list-item-subtitle>{{ status }}</v-list-item-subtitle>
                     </v-list-item>
                 </v-list>
@@ -45,13 +45,13 @@
 
         <v-row v-if="status !== 'quoting'">
             <v-col cols="12" md="6">
-                <h2>Productos usados</h2>
+                <h2>{{ ($t('admin.cotize.infoService.productsString')) }}</h2>
                 <v-table density="compact">
                     <thead>
                         <tr>
-                            <th class="text-left">productos</th>
-                            <th class="text-left">cantida</th>
-                            <th class="text-left">Total</th>
+                            <th class="text-left">{{ ($t('admin.cotize.infoService.products')) }}</th>
+                            <th class="text-left">{{ ($t('admin.cotize.infoService.amount')) }}</th>
+                            <th class="text-left">{{ ($t('admin.cotize.infoService.total')) }}</th>
                             <!-- <th class="text-left">{{ $t('profile.pages.infoMyService.productString') }}</th>
                             <th class="text-left">{{ $t('profile.pages.infoMyService.quantityString') }}</th>
                             <th class="text-left">{{ $t('profile.pages.infoMyService.totalString') }}</th> -->
@@ -71,16 +71,16 @@
                     <v-col cols="12" md="6">
                         <v-list>
                             <!-- <h2>{{ $t('profile.pages.infoMyService.costBreakdownString') }}</h2> -->
-                            <h2>Costos desglosados</h2>
+                            <h2>{{ ($t('admin.cotize.infoService.costsString')) }}</h2>
                             
                             <v-list-item>
-                                <v-list-item-title>Costos en mano de obra</v-list-item-title>
+                                <v-list-item-title>{{ ($t('admin.cotize.infoService.handWork')) }}</v-list-item-title>
                                 <!-- <v-list-item-title>{{ $t('profile.pages.infoMyService.laborString')
                                     }}</v-list-item-title> -->
                                 <v-list-item-subtitle>${{ laborCost }}</v-list-item-subtitle>
                             </v-list-item>
                             <v-list-item>
-                                <v-list-item-title>Costos de maquinaria</v-list-item-title>
+                                <v-list-item-title>{{ ($t('admin.cotize.infoService.machinery')) }}</v-list-item-title>
                                 <!-- <v-list-item-title>{{ $t('profile.pages.infoMyService.machineryString')}}</v-list-item-title> -->
                                 <v-list-item-subtitle>${{ machineryCost }}</v-list-item-subtitle>
                             </v-list-item>
@@ -89,7 +89,7 @@
                     <v-col cols="12" md="6">
                         <v-list>
                             <!-- <h2>{{ $t('profile.pages.infoMyService.assignedEmployeesString') }}</h2> -->
-                            <h2>Empleados</h2>
+                            <h2>{{ ($t('admin.cotize.infoService.employee')) }}</h2>
                             <v-list-item v-for="(employee, index) in employeeList" :key="index">
                                 <v-list-item-title>{{ employee }}</v-list-item-title>
                             </v-list-item>
