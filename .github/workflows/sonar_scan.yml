@@ -1,10 +1,11 @@
-name: Build
+name: SonarCloud Security Scan
 on:
   push:
     branches:
       - main
+      - dev-ave
   pull_request:
-    types: [opened, synchronize, reopened]
+  workflow_dispatch:
 jobs:
   sonarcloud:
     name: SonarCloud
