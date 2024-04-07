@@ -16,6 +16,7 @@
               color="green-darken-3"
                 v-model="department"
                 variant="underlined"
+                :error-messages="errors.department"
                 :placeholder="$t('login.pages.loginAdmin.description')"
                 :label="$t('login.pages.loginAdmin.department')"
                 :items="['admin', 'employed', 'finance']"
@@ -28,6 +29,7 @@
                 color="green-darken-3"
                 outlined
                 required
+                @input="validateEmail"
               ></v-text-field>
               <label for=""> {{ ($t('login.pages.loginAdmin.password')) }}</label>
               <v-text-field
@@ -38,7 +40,9 @@
                 :append-inner-icon="passwordVisible ? 'mdi-eye-off' : 'mdi-eye'"
                 :type="passwordVisible ? 'text' : 'password'"
                 outlined
+                :error-messages="errors.password"
                 @click:append-inner="togglePasswordVisibility"
+                @input="validatePassword"
                 color="green-darken-3"
                 required
               ></v-text-field>
@@ -72,6 +76,8 @@
 
 <script>
 import { useUserStore } from '@/store/userStore.js'
+import { departmentValidate, emailValidate, passwordValidate} from '@/plugins/validations.js'
+import { toast } from 'vue3-toastify'
 const userStore = useUserStore()
 
 export default {
@@ -82,7 +88,12 @@ export default {
       rol : '',
       passwordVisible : false,
       department : '',
-      dialog : false
+      dialog : false,
+      errors : {
+        password : '',
+        email : '',
+        department : ''
+      }
     }
     
   },
@@ -90,7 +101,23 @@ export default {
     togglePasswordVisibility () {
       this.passwordVisible = !this.passwordVisible
     },
+    validatePassword(){
+      this.errors.password = passwordValidate(this.password)
+    },
+    validateEmail(){
+      this.errors.email = emailValidate(this.email)
+    },
+    validateDeparment (){
+      this.errors.department = departmentValidate(this.department)
+    },
     async login () {
+      this.validateDeparment()
+      this.validateEmail()
+      this.validatePassword()
+      if (Object.values(this.errors).some(error => error !== '')) {
+        toast.warning('Por favor llena correctamente los campos')
+        return;
+      }
       this.dialog = true
       try {
         const email = this.email

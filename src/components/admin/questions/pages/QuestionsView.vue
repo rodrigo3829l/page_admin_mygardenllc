@@ -31,93 +31,48 @@
               >
                 Eliminar
               </v-btn>
-           
-  
           </template>
         </v-data-table>
-      </v-card>
-      <v-btn
-        @click="addItem"
-      >
-        Agregar
-      </v-btn>
+      </v-card><br>
+      <v-row>
+        <v-col cols="12">
+          <v-btn
+            @click="addItem"
+            color="green-darken-4" block
+          >
+            Agregar
+          </v-btn>
+        </v-col>
+      </v-row>
     </v-container>
 
-    <v-dialog
-        v-model="editQuestion" 
-        width="auto"
-        persistent
-    >
-        <v-card v-if="item._id">
-            <v-card-title 
-                
-            >
-                Editar pregunta
-            </v-card-title>
-            <v-card-text>
-                <v-label>
-                    Pregunta
-                </v-label>
-                <v-text-field
-                    v-model="item.question"
-                    type="text"
-                    variant="outlined"
-                    color="green-darken-4"
-                >
-                    
-                </v-text-field>
-                <v-label>
-                    Respuesta
-                </v-label>
-                <v-text-field
-                    v-model="item.answer"
-                    type="text"
-                    variant="outlined"
-                    color="green-darken-4"
-                >
-                    
-                </v-text-field>
-            </v-card-text>
-            <v-card-actions class="justify-end">
-                <v-btn color="primary" @click="editQuestion = false">Cancelar</v-btn>
-                <v-btn color="error" @click="editQuestionItem"> Confimar </v-btn>
-            </v-card-actions>
-        </v-card>
-
-        <v-card v-else>
-            <v-card-title >
-                Agregar
-            </v-card-title>
-            <v-card-text>
-                <v-label>
-                    Pregunta
-                </v-label>
-                <v-text-field
-                    v-model="item.pregunta"
-                    type="text"
-                    variant="outlined"
-                    color="green-darken-4"
-                >
-                    
-                </v-text-field>
-                <v-label>
-                    Respuesta
-                </v-label>
-                <v-text-field
-                    v-model="item.respuesta"
-                    type="text"
-                    variant="outlined"
-                    color="green-darken-4"
-                >
-                    
-                </v-text-field>
-            </v-card-text>
-            <v-card-actions class="justify-end">
-                <v-btn color="primary" @click="editQuestion = false">Cancelar</v-btn>
-                <v-btn color="error" @click="addQuestion"> Agregar </v-btn>
-            </v-card-actions>
-        </v-card>
-    </v-dialog>
+    <v-dialog v-model="editQuestion" max-width="500px">
+    <v-card>
+      <v-card-title>
+        {{ item._id ? 'Editar Pregunta' : 'Agregar Pregunta' }}
+      </v-card-title>
+      <v-card-text>
+        <v-container>
+          <v-row>
+            <v-col cols="12">
+              <v-text-field v-model="item.question" label="Pregunta" outlined color="green darken-4"></v-text-field>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col cols="12">
+              <v-text-field v-model="item.answer" label="Respuesta" outlined color="green darken-4"></v-text-field>
+            </v-col>
+          </v-row>
+        </v-container>
+      </v-card-text>
+      <v-card-actions class="justify-end">
+        <v-btn color="primary" @click="editQuestion = false">Cancelar</v-btn>
+        <v-btn color="error" @click="item._id ? editQuestionItem() : addQuestion()">
+          {{ item._id ? 'Confirmar' : 'Agregar' }}
+        </v-btn>
+      </v-card-actions>
+    </v-card>
+  </v-dialog>
   
     <v-dialog 
       v-model="deleteDialog" 
@@ -181,8 +136,8 @@
         addItem (){
             this.editQuestion = true
             this.item = {
-                pregunta : '',
-                respuesta : ''
+                question : '',
+                answer : ''
             }
         },
         async deleteQuestion () {
@@ -243,8 +198,8 @@
             this.overlay = true
             try{
                 const datos = {
-                    pregunta: this.item.pregunta ,
-                    respuesta : this.item.respuesta
+                    pregunta: this.item.question ,
+                    respuesta : this.item.answer
                 }
                 const { data } = await api({
                     method : 'POST',
@@ -259,6 +214,7 @@
                     toast.success('Se agrego correctamente')
                 }else{
                     toast.error('Hubo un problema al agregar una pregunta')
+                    console.log('prueba')
                 }
             }catch (error) {
                 console.log(error)

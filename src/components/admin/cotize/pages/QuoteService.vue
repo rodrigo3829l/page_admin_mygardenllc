@@ -67,12 +67,12 @@
         <v-row>
             <v-col cols="6">
                 <v-text-field v-model="laborCost" type="number" :label="$t('admin.cotize.quoteService.costString')" variant="outlined"
-                    color="green-darken-3">
+                    color="green-darken-3" :error-messages="errors.labor" @input="validateLabor">
                 </v-text-field>
             </v-col>
             <v-col cols="6">
                 <v-text-field v-model="machineryCost" type="number" :label="$t('admin.cotize.quoteService.costMachinery')" variant="outlined"
-                    color="green-darken-3">
+                    color="green-darken-3" :error-messages="errors.machinery" @input="validateMach" >
                 </v-text-field>
             </v-col>
         </v-row>
@@ -94,26 +94,35 @@
 <script>
 import { api } from '@/axios/axios'
 import { toast } from 'vue3-toastify'
+import { numberValidate } from '@/plugins/validations.js'
 export default {
     data() {
         return {
             overlay: false,
             employed: '',
             product: '',
-            laborCost: 0,
-            machineryCost: 0,
+            laborCost: '',
+            machineryCost: '',
             itemsEmployed: [],
             itemsProducts: [],
             selectedEmployeds: [],
             selectedProducts: [],
             errors: {
                 product: '',
-                employed: ''
+                employed: '',
+                labor : '',
+                machinery : ''
             },
             
         }
     },
     methods: {
+        validateLabor(){
+            this.errors.labor = numberValidate(this.laborCost)
+        },
+        validateMach(){
+            this.errors.machinery = numberValidate(this.machineryCost)
+        },
         async getEmployeds() {
             try {
                 const token = localStorage.getItem('token')
@@ -167,6 +176,20 @@ export default {
             }
         },
         async quote() {
+            this.validateLabor()
+            this.validateMach()
+            if(this.selectedProducts.length < 1){
+                this.errors.product = 'Selecciona almenos un producto'
+                return
+            }
+            if(this.selectedEmployeds.length < 1){
+                this.errors.employed = 'Selecciona almenos un empleado'
+                return
+            }
+            if(this.errors.machinery !== '' || this.errors.labor !== ''){
+                toast.warning('Por favor llenar correctaente los campos')
+                return
+            }
             this.overlay = true
             // Obtener los IDs de los empleados seleccionados
             const employedsIds = this.selectedEmployeds.map(employed => employed.id);

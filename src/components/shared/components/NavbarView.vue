@@ -19,19 +19,19 @@
         :value="link.to"
       ></v-list-item>
 
-      <v-list-item v-if="theme.global.name.value === 'dark'" prepend-icon="mdi-white-balance-sunny" title="Light" @click="toggleTheme"></v-list-item>
-      <v-list-item v-if="theme.global.name.value === 'light'" prepend-icon="mdi-weather-night" title="Dark" @click="toggleTheme"></v-list-item>
-
+      
       <div v-if="userStore.rol === 'admin'">
         <v-list-item prepend-icon="mdi-lightbulb-outline" @click="$router.push({ name: 'predictions' })" title="Predicciones"></v-list-item>
         <v-list-item prepend-icon="mdi-currency-usd" @click="$router.push({ name: 'quote' })" title="Cotizar"></v-list-item>
         <v-list-item prepend-icon="mdi-help-circle-outline" @click="$router.push({ name: 'questions' })" title="Preguntas frecuentes"></v-list-item>
       </div>
-
+      <v-list-item v-if="theme.global.name.value === 'dark'" prepend-icon="mdi-white-balance-sunny" title="Light" @click="toggleTheme"></v-list-item>
+      <v-list-item v-if="theme.global.name.value === 'light'" prepend-icon="mdi-weather-night" title="Dark" @click="toggleTheme"></v-list-item>
+      
       <template v-slot:append v-if="userStore.token"> 
         <div class="pa-2">
           <v-btn block @click="logout">
-            Loguot
+            Cerrar sesion
           </v-btn>
         </div>
       </template>
@@ -62,7 +62,7 @@
                   v-if="userStore.token"
                   variant="text"
                   @click="logout">
-                    Logout
+                    Cerrar sesion
                   </v-btn>
                 </ul>
               </div>

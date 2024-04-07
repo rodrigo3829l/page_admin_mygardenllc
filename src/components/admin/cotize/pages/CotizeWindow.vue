@@ -93,12 +93,7 @@ export default {
       statusDialog : false,
       search: "",
       headers: [
-        {
-          align: "start",
-          key: "_id",
-          
-          title: "Id",
-        },
+        
         { key: "user", title: i18n.global.t('admin.cotize.cotizeWindow.userString') },
         { key: "service", title: i18n.global.t('admin.cotize.cotizeWindow.serviceString') },
         { key: "description", title: i18n.global.t('admin.cotize.cotizeWindow.desString') },

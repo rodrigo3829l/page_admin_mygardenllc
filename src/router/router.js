@@ -85,17 +85,13 @@ router.afterEach(() => {
 
 router.beforeEach( async (to, from, next) =>{
 
-    const userStore = useUserStore();
+    // const userStore = useUserStore();
     const needLog = to.meta.isLoged
-    const token = userStore.token
+    const token = localStorage.getItem('token')
 
-    if(needLog){
-        if(token){
-            //mecesita un token para avanzar
-            next()
-        }
-        //redirije a otra pantalla
-    }else{
+    if(needLog && !token){
+        next('login')
+    } else{
         next()
     }
 

@@ -1,10 +1,10 @@
 <template>
   <v-container>
-    <v-card :title="$t('employedsPages.servicesWindow.welcomeString')" ${userStore.name} flat>
+    <v-card :title="$t('employedsPages.servicesWindow.welcomeString') + ' ' + userStore.name" flat>
       <template v-slot:text>
         <v-text-field
           v-model="search"
-          :label="$t('employedsPages.servicesWindow.welcomeString')"
+          label="Buscar"
           prepend-inner-icon="mdi-magnify"
           variant="outlined"
           hide-details
@@ -52,11 +52,6 @@ export default {
         { key: "description", title: i18n.global.t('employedsPages.servicesWindow.description') },
         { key: "status", title: i18n.global.t('employedsPages.servicesWindow.status') },
         { title: i18n.global.t('employedsPages.servicesWindow.actions'), key: "actions", sortable: false, align : 'center' },
-        // { key: "description", title: "Descripcion" },
-        // { key: "status", title: "Estatus" },
-        // { key: "quote", title: "Total" },
-        // { key: "pending", title: "Pendiente" },
-        // { key: "typeReserve", title: "Tipo de reserva" },
       ],
       services: [
         {

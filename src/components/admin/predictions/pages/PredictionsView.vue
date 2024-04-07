@@ -6,13 +6,13 @@
       <!-- Columna 1 - Fecha de referencia -->
       <v-col cols="12" md="4">
         <v-card class="pa-3">
-          <p class="headline mb-3">{{ ($t('predictions.predictionsView.ChooseString')) }}</p>
+          <p class="headline mb-3">{{ ($t('admin.predictions.predictionsView.ChooseString')) }}</p>
           <v-row>
             <v-col cols="6">
               <v-select
                 v-model="selectedReferenceYear"
                 :items="referenceYears"
-                :label="$t('predictions.predictionsView.yearString')"
+                :label="$t('admin.predictions.predictionsView.yearString')"
                 dense
                 @update:model-value="calculateMoths"
               ></v-select>
@@ -21,7 +21,7 @@
               <v-select
                 v-model="selectedReferenceMonth"
                 :items="months"
-                :label="$t('predictions.predictionsView.month')"
+                :label="$t('admin.predictions.predictionsView.month')"
                 dense
                 @update:model-value="calculateMoths"
                 item-title="text"
@@ -31,7 +31,7 @@
           </v-row>
           <v-text-field
             v-model.number="referenceServiceCount"
-            :label="$t('predictions.predictionsView.servicesString')"
+            :label="$t('admin.predictions.predictionsView.servicesString')"
             type="number"
           ></v-text-field>
         </v-card>
@@ -39,13 +39,13 @@
 
       <v-col cols="12" md="4">
         <v-card class="pa-3">
-          <p class="headline mb-3">{{ ($t('predictions.predictionsView.dateString')) }}</p>
+          <p class="headline mb-3">{{ ($t('admin.predictions.predictionsView.dateString')) }}</p>
           <v-row>
             <v-col cols="6">
               <v-select
                 v-model="selectedCurrentYear"
                 :items="currentYears"
-                :label="$t('predictions.predictionsView.yearString')"
+                :label="$t('admin.predictions.predictionsView.yearString')"
                 @update:model-value="calculateMothsCurrent"
               ></v-select>
             </v-col>
@@ -53,7 +53,7 @@
               <v-select
                 v-model="selectedCurrentMonth"
                 :items="months"
-                :label="$t('predictions.predictionsView.month')"
+                :label="$t('admin.predictions.predictionsView.month')"
                 item-title="text"
                 @update:model-value="calculateMothsCurrent"
                 item-value="value"
@@ -62,7 +62,7 @@
           </v-row>
           <v-text-field
             v-model.number="currentServiceCount"
-            :label="$t('predictions.predictionsView.servicesString')"
+            :label="$t('admin.predictions.predictionsView.servicesString')"
             type="number"
           ></v-text-field>
         </v-card>
@@ -71,11 +71,11 @@
 
       <v-col cols="12" md="4">
         <v-card class="pa-3">
-          <p class="headline mb-3">{{ ($t('predictions.predictionsView.prediction')) }}</p>
+          <p class="headline mb-3">{{ ($t('admin.predictions.predictionsView.prediction')) }}</p>
           <v-select
             v-model="selectedPredictionYear"
             :items="predictionYears"
-            :label="$t('predictions.predictionsView.yearString')"
+            :label="$t('admin.predictions.predictionsView.yearString')"
             @update:model-value="addPredictionYear"
           ></v-select>
           <v-chip
@@ -97,26 +97,26 @@
           <template v-slot:default>
             <thead>
               <tr>
-                <th class="text-left">{{ ($t('predictions.predictionsView.dataString')) }}</th>
-                <th class="text-left">{{ ($t('predictions.predictionsView.serviceString')) }}</th>
-                <th class="text-left">{{ ($t('predictions.predictionsView.timeString')) }}</th>
+                <th class="text-left">{{ ($t('admin.predictions.predictionsView.dataString')) }}</th>
+                <th class="text-left">{{ ($t('admin.predictions.predictionsView.serviceString')) }}</th>
+                <th class="text-left">{{ ($t('admin.predictions.predictionsView.timeString')) }}</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td>{{ ($t('predictions.predictionsView.reference')) }}</td>
+                <td>{{ ($t('admin.predictions.predictionsView.reference')) }}</td>
                 <td>{{ referenceServiceCount }}</td>
                 <td>{{ monthDiferenceReference }} {{ ($t('admin.predictions.predictionsView.monthString')) }} {{ getMonthName(selectedReferenceMonth) }} del {{ selectedReferenceYear }}</td>
               </tr>
               <tr>
-                <td>{{ ($t('predictions.predictionsView.currentDate')) }}</td>
+                <td>{{ ($t('admin.predictions.predictionsView.currentDate')) }}</td>
                 <td>{{ currentServiceCount }}</td>
                 <td>{{ monthDiferenceCurrent }} {{ ($t('admin.predictions.predictionsView.monthString')) }},  {{ getMonthName(selectedCurrentMonth) }} del {{ selectedCurrentYear }}</td>
               </tr>
               <tr v-for="(year, index) in selectedPredictionYears" :key="index">
-                <td> {{ ($t('predictions.predictionsView.predictionString')) }} {{ index + 1 }}</td>
+                <td> {{ ($t('admin.predictions.predictionsView.predictionString')) }} {{ index + 1 }}</td>
                 <td>{{ year.prediction }}</td>
-                <td>{{ year.diference }} {{ ($t('predictions.predictionsView.monthString')) }}, {{ year.text }}</td>
+                <td>{{ year.diference }} {{ ($t('admin.predictions.predictionsView.monthString')) }}, {{ year.text }}</td>
               </tr>
             </tbody>
           </template>
@@ -125,7 +125,7 @@
     </v-row>
     <v-row>
       <v-col cols="12">
-        <v-btn color="green-darken-4" block @click="calculatePrediction">{{ ($t('predictions.predictionsView.calculateString')) }}</v-btn>
+        <v-btn color="green-darken-4" block @click="calculatePrediction">{{ ($t('admin.predictions.predictionsView.calculateString')) }}</v-btn>
       </v-col>
     </v-row>
   
