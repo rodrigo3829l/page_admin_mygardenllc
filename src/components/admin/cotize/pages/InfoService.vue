@@ -1,4 +1,9 @@
 <template>
+    <v-breadcrumbs :items="items">
+      <template v-slot:divider>
+        <v-icon icon="mdi-chevron-right"></v-icon>
+      </template>
+    </v-breadcrumbs>
     <v-container style="height: 400px;" v-if="!loaded">
         <v-row class="fill-height" align-content="center" justify="center">
             <v-col class="text-subtitle-1 text-center" cols="12">
@@ -108,6 +113,18 @@ import { api } from '@/axios/axios.js'
 export default {
     data() {
         return {
+            items: [
+        {
+          title: 'Home',
+          disabled: true,
+          href: '/admin/quote',
+        },
+        {
+            title: 'Information',
+            disabled: true,
+            href: '/admin/info',
+        }
+      ],
             serviceName: '',
             serviceDescription: '',
             servicePrice: 0,

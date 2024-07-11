@@ -1,4 +1,9 @@
 <template>
+<v-breadcrumbs :items="items">
+      <template v-slot:divider>
+        <v-icon icon="mdi-chevron-right"></v-icon>
+      </template>
+    </v-breadcrumbs>
   <v-container>
     <v-card
     :title="$t('finance.pages.infoPays.payments')"
@@ -152,6 +157,14 @@ const FakeAPI = {
   export default {
     data () {
       return {
+        items: [
+        {
+          title: 'Finance',
+          disabled: true,
+          href: '/finance',
+        },
+        
+      ],
         itemsPerPage: 9,
         serverItems : [],
         search: '',

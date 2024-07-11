@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import { useUserStore } from '@/store/userStore.js'
+// import { useUserStore } from '@/store/userStore.js'
 // import { useUserStore } from '@/store/store';
 
 const routes = [
@@ -46,6 +46,11 @@ const routes = [
                 name : 'infoservice',
                 component : () => import('../components/admin/cotize/pages/InfoService.vue')
             },
+            // {
+            //     path : 'predictions',
+            //     name : 'predictions',
+            //     component : () => import('../components/admin/predictions/pages/PredictionsViewCopy.vue')
+            // },
             {
                 path : 'predictions',
                 name : 'predictions',
@@ -61,7 +66,41 @@ const routes = [
                 name: 'default-quote',
                 redirect: {name: 'quote'},
             },
-            
+            {
+                path : 'comments',
+                name : 'comments',
+                component : () => import('../components/admin/comments/pages/CommentView.vue')
+            },
+            {
+                path : 'services',
+                name : 'services',
+                component : () => import('../components/admin/services/pages/ServicesView.vue')
+            },
+            {
+                path : 'calendar',
+                name : 'calendar',
+                component : () => import('../components/admin/calendar/CalendarView.vue')
+            },
+            {
+                path : 'unit',
+                name : 'unit',
+                component : () => import('../components/admin/units/pages/UnitVue.vue')
+            },
+            {
+                path : 'provider',
+                name : 'provider',
+                component : () => import('../components/admin/provider/pages/ProviderView.vue')
+            },
+            {
+                path : 'products',
+                name : 'products',
+                component : () => import('../components/admin/products/pages/ProductsView.vue')
+            },
+            {
+                path : 'dates',
+                name : 'dates',
+                component : () => import('../components/admin/dates/pages/DateView.vue')
+            },
         ]
     },
     {

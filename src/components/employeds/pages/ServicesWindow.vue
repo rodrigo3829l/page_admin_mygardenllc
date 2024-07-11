@@ -1,4 +1,9 @@
 <template>
+  <v-breadcrumbs :items="items">
+      <template v-slot:divider>
+        <v-icon icon="mdi-chevron-right"></v-icon>
+      </template>
+    </v-breadcrumbs>
   <v-container>
     <v-card :title="$t('employedsPages.servicesWindow.welcomeString') + ' ' + userStore.name" flat>
       <template v-slot:text>
@@ -41,6 +46,14 @@ const userStore = useUserStore()
 export default {
   data () {
     return {
+      items: [
+        {
+          title: 'Employed',
+          disabled: true,
+          href: '/employed',
+        },
+        
+      ],
       userStore,
       search: "",
       headers: [

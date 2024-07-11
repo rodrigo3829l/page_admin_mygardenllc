@@ -1,4 +1,9 @@
 <template>
+  <v-breadcrumbs :items="items">
+      <template v-slot:divider>
+        <v-icon icon="mdi-chevron-right"></v-icon>
+      </template>
+    </v-breadcrumbs>
   <v-container>
     <v-card :title="$t('admin.cotize.cotizeWindow.serviceString')" flat>
       <template v-slot:text>
@@ -90,6 +95,14 @@ import { i18n } from '@/main.js'
 export default {
   data() {
     return {
+      items: [
+        {
+          title: 'Home',
+          disabled: true,
+          href: '/admin/quote',
+        },
+        
+      ],
       statusDialog : false,
       search: "",
       headers: [

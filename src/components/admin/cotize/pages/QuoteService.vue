@@ -1,4 +1,9 @@
 <template>
+    <v-breadcrumbs :items="items">
+      <template v-slot:divider>
+        <v-icon icon="mdi-chevron-right"></v-icon>
+      </template>
+    </v-breadcrumbs>
     <v-container>
         <v-row>
             <v-col cols="12">
@@ -98,6 +103,18 @@ import { numberValidate } from '@/plugins/validations.js'
 export default {
     data() {
         return {
+            items: [
+                {
+                    title: 'Home',
+                    disabled: false,
+                    href: '/admin/quote',
+                },
+                {
+                    title: 'Quote',
+                    disabled: true,
+                    href: '/admin/quote',
+                },
+            ],
             overlay: false,
             employed: '',
             product: '',

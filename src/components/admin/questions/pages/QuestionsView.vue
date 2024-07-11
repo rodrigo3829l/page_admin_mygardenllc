@@ -1,4 +1,9 @@
 <template>
+  <v-breadcrumbs :items="items">
+      <template v-slot:divider>
+        <v-icon icon="mdi-chevron-right"></v-icon>
+      </template>
+    </v-breadcrumbs>
     <v-container>
       <v-card title="Preguntas y respuestas" flat>
         <template v-slot:text>
@@ -66,8 +71,8 @@
         </v-container>
       </v-card-text>
       <v-card-actions class="justify-end">
-        <v-btn color="primary" @click="editQuestion = false">Cancelar</v-btn>
-        <v-btn color="error" @click="item._id ? editQuestionItem() : addQuestion()">
+        <v-btn color="error" @click="editQuestion = false">Cancelar</v-btn>
+        <v-btn color="green-darken-4" @click="item._id ? editQuestionItem() : addQuestion()">
           {{ item._id ? 'Confirmar' : 'Agregar' }}
         </v-btn>
       </v-card-actions>
@@ -88,8 +93,8 @@
           {{ ($t('admin.cotize.cotizeWindow.description1String')) }}
         </v-card-text>
         <v-card-actions class="justify-end">
-          <v-btn color="primary" @click="deleteDialog = false">No</v-btn>
-          <v-btn color="error" @click="deleteQuestion"> {{ ($t('admin.cotize.cotizeWindow.yesString')) }}</v-btn>
+          <v-btn color="error" @click="deleteDialog = false">No</v-btn>
+          <v-btn color="green-darken-4" @click="deleteQuestion"> {{ ($t('admin.cotize.cotizeWindow.yesString')) }}</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -106,6 +111,14 @@
   export default {
     data() {
       return {
+        items: [
+        {
+          title: 'Questions',
+          disabled: true,
+          href: '/admin/questions',
+        },
+        
+      ],
         overlay :  false,
         deleteDialog : false,
         editQuestion : false,
