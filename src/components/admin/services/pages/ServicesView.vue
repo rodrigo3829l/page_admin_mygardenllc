@@ -43,7 +43,8 @@
             <v-form ref="serviceForm">
                 <v-text-field v-model="form.name" label="Nombre del servicio" required></v-text-field>
                 <v-text-field v-model="form.description" label="Descripcion del servicio" required></v-text-field>
-                <v-file-input v-model="form.img" label="Imagen" accept="image/*" required></v-file-input>
+                <!-- Integración de v-file-input con handleImageUpload -->
+                <v-file-input label="Imagen" accept="image/*" @change="handleImageUpload" :error-messages="errors.image" required></v-file-input>
                 <v-select v-model="form.tipoDeServicio" :items="typeService" item-title="tipo" item-value="tipo" label="Tipo de servicio" item-text="name" required></v-select>
             </v-form>
         </v-card-text>
@@ -110,6 +111,10 @@ export default {
             serviceTypes: [], // Add your service types here
             typeService: null,
             currentServiceId: null,
+            errors: {
+                image: "", // Error message for image upload
+            },
+            public_id : null
         };
     },
     methods: {
@@ -118,7 +123,7 @@ export default {
                 const {
                     data
                 } = await api.get("/services/get");
-                this.services = data.services.map(service => ({
+                this.services = data.services.map((service) => ({
                     ...service,
                     loading: false,
                 }));
@@ -128,7 +133,7 @@ export default {
         },
         openEditDialog(service) {
             this.isEdit = true;
-            this.currentServiceId = service.id;
+            this.currentServiceId = service._id;
             this.form = {
                 ...service
             };
@@ -145,9 +150,29 @@ export default {
             this.serviceDialog = true;
         },
         async updateService() {
+            const token = localStorage.getItem('token')
             try {
-                await api.put(`/services/update/${this.currentServiceId}`, this.form);
-                toast.success("Servicio actualizado correctamente");
+                const datos = {
+                    name : this.form.name,
+                    description :  this.form.description,
+                    tipoDeServicio : this.form.tipoDeServicio.tipo,
+                    img : this.form.img,
+                    public_id : this.public_id
+                }
+                const { data } = await api({
+                    method: 'PUT',
+                    url: `/services/update/${this.currentServiceId}`,
+                    headers: {
+                        'Authorization': 'Bearer ' + token,
+                        'rol': 'admin'
+                    },
+                    data: datos
+                });
+                if (data.success) {
+                    toast.success("Servicio actualizado con éxito");
+                } else {
+                    toast.error(data.msg);
+                }
                 this.getServices();
                 this.serviceDialog = false;
             } catch (error) {
@@ -156,8 +181,24 @@ export default {
         },
         async addService() {
             try {
-                await api.post("/services/add", this.form);
-                toast.success("Servicio agregado correctamente");
+                const token = localStorage.getItem('token')
+                const {
+                    data
+                } = await api({
+                    method: 'POST',
+                    url: '/services/add',
+                    headers: {
+                        'Authorization': 'Bearer ' + token,
+                        'rol': 'admin'
+                    },
+                    data: this.form
+                });
+
+                if(data.success){
+                    toast.success("Servicio aregado con exito")
+                }else{
+                    toast.error(data.msg)
+                }
                 this.getServices();
                 this.serviceDialog = false;
             } catch (error) {
@@ -166,6 +207,7 @@ export default {
         },
         async getTypesServices() {
             try {
+                
                 const {
                     data
                 } = await api.get("/typeservice/get");
@@ -181,15 +223,19 @@ export default {
                 const {
                     data
                 } = await api({
-                    method: 'PUT',
+                    method: "PUT",
                     url: `/services/usuable/${service._id}`,
                     headers: {
-                        'Authorization': 'Bearer ' + token,
-                        'rol': 'admin'
+                        Authorization: "Bearer " + token,
+                        rol: "admin",
                     },
                 });
                 if (data.success) {
-                    toast.success(`El servicio ha sido ${service.isUsable ? "ocultado" : "mostrado"} correctamente`);
+                    toast.success(
+                        `El servicio ha sido ${
+                service.isUsable ? "ocultado" : "mostrado"
+              } correctamente`
+                    );
                 } else {
                     toast.error(data.msg);
                 }
@@ -198,6 +244,30 @@ export default {
                 toast.error("Error al cambiar el estado del servicio");
             } finally {
                 service.loading = false;
+            }
+        },
+        handleImageUpload(event) {
+            this.public_id = this.form.img ? this.form.img.public_id : null;
+            const file = event.target.files[0];
+
+            // Check if a file is selected
+            this.errors.image = !file ? this.$t("registration.alerts.imageFile") : "";
+
+            // Check the file size (in bytes)
+            const maxSize = 4 * 1024 * 1024; // 4 megabytes
+            this.errors.image = file.size > maxSize ? this.$t("registration.alerts.sizeFile") : "";
+
+            // Read the image as a Blob object
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                this.form.img = e.target.result;
+            };
+
+            // Check if the file type is an image
+            if (file.type.startsWith("image/")) {
+                reader.readAsDataURL(file);
+            } else {
+                this.errors.image = this.$t("registration.alerts.validImage");
             }
         },
     },
