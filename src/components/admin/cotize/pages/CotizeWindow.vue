@@ -107,13 +107,13 @@ export default {
       search: "",
       headers: [
         
-        { key: "user", title: i18n.global.t('admin.cotize.cotizeWindow.userString') },
-        { key: "service", title: i18n.global.t('admin.cotize.cotizeWindow.serviceString') },
+        { key: "user.name", title: i18n.global.t('admin.cotize.cotizeWindow.userString') },
+        // { key: "service.name", title: i18n.global.t('admin.cotize.cotizeWindow.serviceString') },
         { key: "description", title: i18n.global.t('admin.cotize.cotizeWindow.desString') },
         { key: "status", title: i18n.global.t('admin.cotize.cotizeWindow.statusString') },
-        { key: "quote", title: i18n.global.t('admin.cotize.cotizeWindow.quote') },
+        // { key: "quote", title: i18n.global.t('admin.cotize.cotizeWindow.quote') },
         { key: "pending", title: i18n.global.t('admin.cotize.cotizeWindow.pendingString') },
-        { key: "typeReserve", title: i18n.global.t('admin.cotize.cotizeWindow.typeReserveString') },
+        // { key: "typeReserve", title: i18n.global.t('admin.cotize.cotizeWindow.typeReserveString') },
         { title: i18n.global.t('admin.cotize.cotizeWindow.actionsString'), key: "actions", sortable: false, align : 'center' },
       ],
       services: [],

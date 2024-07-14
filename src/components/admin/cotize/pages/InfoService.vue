@@ -64,7 +64,7 @@
                     </thead>
                     <tbody>
                         <tr v-for="product in productList" :key="product.name">
-                            <td>{{ product.product }}</td>
+                            <td>{{ product.product.product }}</td>
                             <td>{{ product.quantity }}</td>
                             <td>{{ product.total }}</td>
                         </tr>
@@ -96,7 +96,7 @@
                             <!-- <h2>{{ $t('profile.pages.infoMyService.assignedEmployeesString') }}</h2> -->
                             <h2>{{ ($t('admin.cotize.infoService.employee')) }}</h2>
                             <v-list-item v-for="(employee, index) in employeeList" :key="index">
-                                <v-list-item-title>{{ employee }}</v-list-item-title>
+                                <v-list-item-title>{{ employee.name }} {{ employee.apellidoP }} {{ employee.apellidoM }}</v-list-item-title>
                             </v-list-item>
                         </v-list>
                     </v-col>
@@ -141,17 +141,17 @@ export default {
             try {
                 const { data } = await api.get(`/schedule/scheduleservice/${this.$route.params.id}`)
                 console.log(data)
-                this.serviceName = data.newService.service
-                this.pending = data.newService.pending
-                this.serviceDescription = data.newService.description
-                this.status = data.newService.status
-                this.servicePrice = data.newService.quote
-                if (data.newService.status !== 'quoting') {
-                    this.productList = data.newService.products
-                    this.laborCost = data.newService.additionalCosts.labor
-                    this.machineryCost = data.newService.additionalCosts.machinery
-                    this.employeeList = data.newService.employeds
-                    this.porcentage = data.newService.pay.porcentage
+                this.serviceName = data.scheduledService.service.name
+                this.pending = data.scheduledService.pending
+                this.serviceDescription = data.scheduledService.description
+                this.status = data.scheduledService.status
+                this.servicePrice = data.scheduledService.quote
+                if (data.scheduledService.status !== 'quoting') {
+                    this.productList = data.scheduledService.products
+                    this.laborCost = data.scheduledService.additionalCosts.labor
+                    this.machineryCost = data.scheduledService.additionalCosts.machinery
+                    this.employeeList = data.scheduledService.employeds
+                    this.porcentage = data.scheduledService.pay.porcentage
                 }
                 this.loaded = true
                 console.log(data)

@@ -11,12 +11,12 @@ import '@mdi/font/css/materialdesignicons.css'
 
 import { createVuetify } from 'vuetify'
 import { VCalendar } from 'vuetify/labs/VCalendar'
-import { VDateInput } from 'vuetify/labs/VDateInput'
+// import { VDateInput } from 'vuetify/labs/VDateInput'
 import 'vuetify/styles' // Asegúrate de importar los estilos
 
 export default createVuetify({
   components: {
-    VCalendar,
-    VDateInput
+    VCalendar
+    // VDateInput
   },
 })

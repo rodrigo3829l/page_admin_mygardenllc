@@ -101,6 +101,11 @@ const routes = [
                 name : 'dates',
                 component : () => import('../components/admin/dates/pages/DateView.vue')
             },
+            {
+                path : 'fechas',
+                name : 'fechas',
+                component : () => import('../components/admin/calendar/CalendarViewCpy.vue')
+            },
         ]
     },
     {
