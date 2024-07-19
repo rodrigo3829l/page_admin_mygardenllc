@@ -110,6 +110,7 @@ export default {
         { key: "user.name", title: i18n.global.t('admin.cotize.cotizeWindow.userString') },
         // { key: "service.name", title: i18n.global.t('admin.cotize.cotizeWindow.serviceString') },
         { key: "description", title: i18n.global.t('admin.cotize.cotizeWindow.desString') },
+        // { key: "user.dates.scheduledTime", title: 'Fecha de visita' },
         { key: "status", title: i18n.global.t('admin.cotize.cotizeWindow.statusString') },
         // { key: "quote", title: i18n.global.t('admin.cotize.cotizeWindow.quote') },
         { key: "pending", title: i18n.global.t('admin.cotize.cotizeWindow.pendingString') },

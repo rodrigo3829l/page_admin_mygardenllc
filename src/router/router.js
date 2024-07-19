@@ -111,6 +111,11 @@ const routes = [
                 name : 'featureinfo',
                 component : () => import('../components/admin/feature/pages/FeatureInfo.vue')
             },
+            {
+                path : 'schedule',
+                name : 'schedule',
+                component : () => import('../components/admin/schedulle/pages/ScheduleView.vue')
+            },
         ]
     },
     {
