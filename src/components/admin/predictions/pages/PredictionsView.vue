@@ -408,6 +408,7 @@ export default {
             }
           ] 
       };
+      console.log(this.chartData)
   },
     calculateServices(time, kValue){
       const exponent = (time - this.monthDiferenceReference) * kValue

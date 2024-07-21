@@ -102,6 +102,11 @@ const routes = [
                 component : () => import('../components/admin/dates/pages/DateView.vue')
             },
             {
+                path : 'analisys',
+                name : 'analisys',
+                component : () => import('../components/admin/comments/pages/AnaliticsView.vue')
+            },
+            {
                 path : 'feature',
                 name : 'feature',
                 component : () => import('../components/admin/feature/pages/FeatureView.vue')
@@ -115,6 +120,11 @@ const routes = [
                 path : 'schedule',
                 name : 'schedule',
                 component : () => import('../components/admin/schedulle/pages/ScheduleView.vue')
+            },
+            {
+                path : 'employeds',
+                name : 'employeds',
+                component : () => import('../components/admin/employes/pages/EmployeView.vue')
             },
         ]
     },

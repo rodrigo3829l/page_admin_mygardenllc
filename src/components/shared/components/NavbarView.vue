@@ -32,7 +32,7 @@
         <v-list-item prepend-icon="mdi-package-variant" @click="$router.push({ name: 'products' })" title="Productos"></v-list-item>
         <v-list-item prepend-icon="mdi-star" @click="$router.push({ name: 'feature' })" title="Proyectos destacados"></v-list-item>
         <v-list-item prepend-icon="mdi-calendar-check" @click="$router.push({ name: 'schedule' })" title="Agenda de servicio"></v-list-item>
-        <v-list-item prepend-icon="mdi-account-multiple" @click="$router.push({ name: 'feature' })" title="Gestion de empleados"></v-list-item>
+        <v-list-item prepend-icon="mdi-account-multiple" @click="$router.push({ name: 'employeds' })" title="Gestion de empleados"></v-list-item>
         <!-- <v-list-item prepend-icon="mdi-calendar-remove" @click="$router.push({ name: 'dates' })" title="Fechas no disponibles"></v-list-item> -->
       </div>
       <v-list-item v-if="theme.global.name.value === 'dark'" prepend-icon="mdi-white-balance-sunny" title="Light" @click="toggleTheme"></v-list-item>
